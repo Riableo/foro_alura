@@ -10,6 +10,8 @@ import com.aluracursos.foroalura.domain.usuario.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class TopicoService {
 
@@ -33,8 +35,8 @@ public class TopicoService {
                         null,
                         dataTopic.titulo(),
                         dataTopic.mensaje(),
-                        dataTopic.fechaCreacion(),
-                        dataTopic.status(),
+                        LocalDateTime.now(),
+                        "Activo",
                         user
                 );
 

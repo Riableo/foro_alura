@@ -21,13 +21,20 @@ import java.net.URI;
 public class TopicoController {
 
     @Autowired
+    private ITopicoRepository topicRepo;
+
+    @Autowired
     private TopicoService topicService;
 
     @PostMapping
     public ResponseEntity<DatosRespuestaTopic> registerTopic(@RequestBody @Valid DatosRegistroTopic dataTopic, UriComponentsBuilder uriComponentsBuilder){
-
+        //TODO: Devolver id en ResponseEntity
         DatosRespuestaTopic dataResponseTopic = topicService.crearTopic(dataTopic);
 
-        return ResponseEntity.ok(dataResponseTopic);
+        Topico topico = topicRepo.findByTitulo(dataResponseTopic.titulo());
+
+        URI url = uriComponentsBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
+
+        return ResponseEntity.created(url).body(dataResponseTopic);
     }
 }
