@@ -14,6 +14,7 @@ public class UsuarioService {
 
     @Autowired
     private IUsuarioRepository usuarioRepo;
+
     public DatosRespuestaUser crearUsuario(DatosRegistroUsuario dataUser){
 
         if (!perfilRepo.existsById(dataUser.idPerfil())){
