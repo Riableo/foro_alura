@@ -1,10 +1,8 @@
-package com.aluracursos.foroalura.domain.perfil;
+package com.aluracursos.foroalura.domain.topico;
 
 import com.aluracursos.foroalura.domain.ValidacionException;
-import com.aluracursos.foroalura.domain.topico.DatosRegistroTopic;
-import com.aluracursos.foroalura.domain.topico.DatosRespuestaTopic;
-import com.aluracursos.foroalura.domain.topico.ITopicoRepository;
-import com.aluracursos.foroalura.domain.topico.Topico;
+import com.aluracursos.foroalura.domain.curso.Curso;
+import com.aluracursos.foroalura.domain.curso.ICursoRepository;
 import com.aluracursos.foroalura.domain.usuario.IUsuarioRepository;
 import com.aluracursos.foroalura.domain.usuario.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +18,9 @@ public class TopicoService {
     private IUsuarioRepository usuarioRepo;
 
     @Autowired
+    private ICursoRepository cursoRepo;
+
+    @Autowired
     private ITopicoRepository topicRepo;
 
     public DatosRespuestaTopic crearTopic(DatosRegistroTopic dataTopic){
@@ -29,6 +30,7 @@ public class TopicoService {
         }
 
         Usuario user = usuarioRepo.findById(dataTopic.idUsuario()).get();
+        Curso curso = cursoRepo.findById(dataTopic.idCurso()).get();
 
         Topico topic =
                 new Topico(
@@ -37,7 +39,8 @@ public class TopicoService {
                         dataTopic.mensaje(),
                         LocalDateTime.now(),
                         "Activo",
-                        user
+                        user,
+                        curso
                 );
 
         topicRepo.save(topic);
