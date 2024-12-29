@@ -1,0 +1,1 @@
+ALTER TABLE Topico ADD CONSTRAINT UC_Topico_mensaje UNIQUE (mensaje);
