@@ -31,6 +31,7 @@ public class Errors {
 
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     public ResponseEntity errorIntegrity(SQLIntegrityConstraintViolationException e){
+        //TODO: Change mssg to less information (constraints) in message
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 
