@@ -8,6 +8,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @RestControllerAdvice
@@ -25,6 +26,11 @@ public class Errors {
 
     @ExceptionHandler(ValidacionException.class)
     public ResponseEntity errorValidation(ValidacionException e){
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+
+    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+    public ResponseEntity errorIntegrity(SQLIntegrityConstraintViolationException e){
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 
