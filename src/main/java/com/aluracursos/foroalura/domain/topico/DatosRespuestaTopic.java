@@ -7,7 +7,8 @@ public record DatosRespuestaTopic(
         String mensaje,
         LocalDateTime fechaCreacion,
         String status,
-        Long idUsuario
+        String Usuario,
+        String Curso
 ) {
     public DatosRespuestaTopic(Topico topic) {
         this(
@@ -15,7 +16,8 @@ public record DatosRespuestaTopic(
                 topic.getMensaje(),
                 topic.getFechaCreacion(),
                 topic.getStatus(),
-                topic.getUsuario().getId()
+                topic.getUsuario().getNombre(),
+                topic.getCurso().getNombre()
         );
     }
 }
