@@ -29,6 +29,10 @@ public class TopicoService {
             throw new ValidacionException("No existe un usuario con el id ingresado.");
         }
 
+        if (!cursoRepo.existsById(dataTopic.idCurso())){
+            throw new ValidacionException("No existe curso con el id ingresado");
+        }
+
         Usuario user = usuarioRepo.findById(dataTopic.idUsuario()).get();
         Curso curso = cursoRepo.findById(dataTopic.idCurso()).get();
 

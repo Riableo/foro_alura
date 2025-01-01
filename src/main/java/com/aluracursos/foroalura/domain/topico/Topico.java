@@ -1,6 +1,7 @@
 package com.aluracursos.foroalura.domain.topico;
 
 import com.aluracursos.foroalura.domain.curso.Curso;
+import com.aluracursos.foroalura.domain.respuesta.Respuesta;
 import com.aluracursos.foroalura.domain.usuario.Usuario;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
@@ -24,6 +25,7 @@ public class Topico {
     String titulo;
     String mensaje;
     LocalDateTime fechaCreacion;
+    //TODO: enum status (careful with DB to avoid errors)
     String status;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id")
