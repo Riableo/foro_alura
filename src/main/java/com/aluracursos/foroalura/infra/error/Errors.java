@@ -2,7 +2,6 @@ package com.aluracursos.foroalura.infra.error;
 
 import com.aluracursos.foroalura.domain.ValidacionException;
 import jakarta.persistence.EntityNotFoundException;
-import org.hibernate.TypeMismatchException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -11,10 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 @RestControllerAdvice
 public class Errors {
@@ -37,7 +33,8 @@ public class Errors {
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     public ResponseEntity errorIntegrity(SQLIntegrityConstraintViolationException e){
         //TODO: Change mssg to less information (constraints) in message
-        return ResponseEntity.badRequest().body(e.getMessage());
+        //return ResponseEntity.badRequest().body(e.getMessage());
+        return ResponseEntity.badRequest().body(new DataErrorIntegrity(e));
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
@@ -50,6 +47,15 @@ public class Errors {
 
         public DatosErrorValidacion(FieldError error){
             this(error.getField(), error.getDefaultMessage());
+        }
+    }
+
+    public record DataErrorIntegrity(String errorCode, String causa){
+        public DataErrorIntegrity(SQLIntegrityConstraintViolationException e){
+            this(
+                    String.valueOf(e.getErrorCode()),
+                    e.getMessage().split("\\s(for key)\\s")[0]
+            );
         }
     }
 
