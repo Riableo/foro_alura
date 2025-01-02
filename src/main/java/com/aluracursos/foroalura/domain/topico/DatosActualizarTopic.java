@@ -10,7 +10,6 @@ public record DatosActualizarTopic(
         String mensaje,
         LocalDateTime fechaCreacion,
         String status,
-        Long idUsuario,
         Long idCurso
 ) {
 }

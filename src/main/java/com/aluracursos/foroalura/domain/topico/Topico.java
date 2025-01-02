@@ -32,7 +32,7 @@ public class Topico {
     @JoinColumn(name = "curso_id")
     Curso curso;
 
-    public void updateTopic(DatosActualizarTopic dataTopic){
+    public void updateTopic(DatosActualizarTopic dataTopic, Curso curso){
         if (dataTopic.titulo() != null){
             this.titulo = dataTopic.titulo();
         }
@@ -43,6 +43,10 @@ public class Topico {
 
         if (dataTopic.status() != null){
             this.status = dataTopic.status();
+        }
+
+        if(dataTopic.idCurso() != null){
+            this.curso = curso;
         }
     }
 }
