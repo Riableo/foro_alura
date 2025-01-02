@@ -8,6 +8,7 @@ import com.aluracursos.foroalura.domain.topico.DatosRespuestaTopic;
 import com.aluracursos.foroalura.domain.topico.ITopicoRepository;
 import com.aluracursos.foroalura.domain.topico.Topico;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
