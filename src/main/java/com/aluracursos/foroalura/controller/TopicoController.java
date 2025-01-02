@@ -1,5 +1,6 @@
 package com.aluracursos.foroalura.controller;
 
+import com.aluracursos.foroalura.domain.ValidacionException;
 import com.aluracursos.foroalura.domain.curso.Curso;
 import com.aluracursos.foroalura.domain.curso.DatosRespuestaCurso;
 import com.aluracursos.foroalura.domain.curso.ICursoRepository;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -74,6 +76,11 @@ public class TopicoController {
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity<DatosRespuestaTopic> topicUpdate(@RequestBody @Valid DatosActualizarTopic dataTopic, @PathVariable Long id){
+
+        if (!id.equals(dataTopic.id())){
+            throw new ValidacionException("No coincide el id ingresado con la ruta ingresada");
+        }
+
         Curso curso = null;
 
         Topico topico = topicRepo.getReferenceById(id);
