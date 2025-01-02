@@ -15,5 +15,7 @@ Project about forum that manages users, topics, answers and courses, also profil
 
 - [**Alter table:**](https://es.stackoverflow.com/questions/32312/alter-table-con-columna-nueva-que-sea-foreign-key-mysql) This source helps me to elaborate a new migration on topic making a new FK from respuesta table.
 - [**Bycrpt generator:**](https://www.browserling.com/tools/bcrypt) This source helps me to encript passwords into bycrpt model.
+- [**Pageable:**](https://stackoverflow.com/questions/22345081/spring-data-jpa-query-and-pageable) This source helps me to implement the pageable method with custom queries.
+- [**Optional params:**](https://stackoverflow.com/questions/22373696/requestparam-in-spring-mvc-handling-optional-parameters) This source helps me to make query with course name and specific year.
 
 ## Images
