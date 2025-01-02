@@ -18,5 +18,7 @@ Project about forum that manages users, topics, answers and courses, also profil
 - [**Pageable:**](https://stackoverflow.com/questions/22345081/spring-data-jpa-query-and-pageable) This source helps me to implement the pageable method with custom queries.
 - [**Optional params:**](https://stackoverflow.com/questions/22373696/requestparam-in-spring-mvc-handling-optional-parameters) This source helps me to make query with course name and specific year.
 - [**Mismatch Exception:**](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/method/annotation/MethodArgumentTypeMismatchException.html) This source allows me know methods to work with the exception of data type.
+- [**Query methods:**](https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html) This source shows me to understand how implement the keyword not on a derived query.
+- [**Samples not:**](https://www.baeldung.com/spring-data-derived-queries) This source shows samples with different keywords to implement with derived queries.
 
 ## Images
