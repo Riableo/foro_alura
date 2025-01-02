@@ -62,15 +62,16 @@ public class TopicoController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<DatosRespuestaTopic>> listTopic(@PageableDefault(size = 10, sort = "fechaCreacion") Pageable paginacion, @RequestParam Optional<String> courseName, @RequestParam Optional<Long> year){
+    public ResponseEntity<Page<DatosTopicList>> listTopic(@PageableDefault(size = 10, sort = "fechaCreacion") Pageable paginacion, @RequestParam Optional<String> courseName, @RequestParam Optional<Long> year){
 
         if (courseName.isPresent() && year.isPresent()){
             return ResponseEntity.ok(
-                    topicRepo.findTopics(courseName.get(), year.get(), paginacion)
-                            .map(DatosRespuestaTopic::new)
+                    topicRepo.findTopics(courseName.get(), year.get(), paginacion).map(DatosTopicList::new)
             );
         }
-        return ResponseEntity.ok(topicRepo.findAll(paginacion).map(DatosRespuestaTopic::new));
+        //return ResponseEntity.ok(topicRepo.findAll(paginacion).map(DatosRespuestaTopic::new));
+        Page<DatosTopicList> topics = topicRepo.findByStatusNot("Desactivado", paginacion).map(DatosTopicList::new);
+        return ResponseEntity.ok(topics);
     }
 
     @PutMapping("/{id}")
@@ -102,4 +103,25 @@ public class TopicoController {
 
         return ResponseEntity.ok(dataResTopic);
     }
+
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    // Logical delete
+    public ResponseEntity deleteTopic(@PathVariable Long id){
+        Topico topico = topicRepo.getReferenceById(id);
+        topico.inactiveTopic();
+        return ResponseEntity.noContent().build();
+    }
+
+    /*
+    // Delete on DB
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity deleteTopic(@PathVariable Long id){
+        Topico topico = topicRepo.getReferenceById(id);
+        topicRepo.delete(topico);
+        return ResponseEntity.noContent().build();
+    }
+     */
 }

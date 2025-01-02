@@ -49,4 +49,8 @@ public class Topico {
             this.curso = curso;
         }
     }
+
+    public void inactiveTopic() {
+        this.status = "Desactivado";
+    }
 }
