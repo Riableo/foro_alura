@@ -2,11 +2,8 @@ package com.aluracursos.foroalura.controller;
 
 import com.aluracursos.foroalura.domain.curso.Curso;
 import com.aluracursos.foroalura.domain.curso.DatosRespuestaCurso;
-import com.aluracursos.foroalura.domain.topico.TopicoService;
-import com.aluracursos.foroalura.domain.topico.DatosRegistroTopic;
-import com.aluracursos.foroalura.domain.topico.DatosRespuestaTopic;
-import com.aluracursos.foroalura.domain.topico.ITopicoRepository;
-import com.aluracursos.foroalura.domain.topico.Topico;
+import com.aluracursos.foroalura.domain.topico.*;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,5 +65,23 @@ public class TopicoController {
             );
         }
         return ResponseEntity.ok(topicRepo.findAll(paginacion).map(DatosRespuestaTopic::new));
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<DatosRespuestaTopic> topicUpdate(@RequestBody @Valid DatosActualizarTopic dataTopic, @PathVariable Long id){
+        Topico topico = topicRepo.getReferenceById(id);
+        topico.updateTopic(dataTopic);
+        DatosRespuestaTopic dataResTopic =
+                new DatosRespuestaTopic(
+                        topico.getTitulo(),
+                        topico.getMensaje(),
+                        topico.getFechaCreacion(),
+                        topico.getStatus(),
+                        topico.getUsuario().getNombre(),
+                        topico.getCurso().getNombre()
+                );
+
+        return ResponseEntity.ok(dataResTopic);
     }
 }

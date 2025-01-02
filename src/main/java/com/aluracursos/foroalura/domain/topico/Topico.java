@@ -1,10 +1,8 @@
 package com.aluracursos.foroalura.domain.topico;
 
 import com.aluracursos.foroalura.domain.curso.Curso;
-import com.aluracursos.foroalura.domain.respuesta.Respuesta;
 import com.aluracursos.foroalura.domain.usuario.Usuario;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -33,4 +31,18 @@ public class Topico {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "curso_id")
     Curso curso;
+
+    public void updateTopic(DatosActualizarTopic dataTopic){
+        if (dataTopic.titulo() != null){
+            this.titulo = dataTopic.titulo();
+        }
+
+        if (dataTopic.mensaje() != null){
+            this.mensaje = dataTopic.mensaje();
+        }
+
+        if (dataTopic.status() != null){
+            this.status = dataTopic.status();
+        }
+    }
 }
