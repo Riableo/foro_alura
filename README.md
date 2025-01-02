@@ -1,15 +1,21 @@
 # Foro alura Challenge Alura|Oracle ONE
 
-Project about forum that manages users, topics, answers and courses, also profiles. It is an API rest made with spring using controllers, service, configuration, JWT, exceptions manage and repository 
+Project about forum that manages users, topics, answers and courses, also profiles. It is an API rest made with spring using controllers, service, configuration, JWT, exceptions manage and repository. 
 
 ### Functionalities
 
-- Authentication
-- Create courses, profiles, users, answers and topics
-- Exceptions control
+- Authentication.
+- Create courses, profiles, users, answers and topics.
+- Exceptions control.
 
 ## Tools
 
+- [**Validation:**](https://www.baeldung.com/spring-boot-bean-validation) This tool allow us have validations before send the response or validations with data sended from client.
+- [**Lombok:**](https://projectlombok.org) This source allow us reduce code with annotations like getter, setter, empty constructor and constructor with all fields.
+- [**Data JPA:**](https://spring.io/projects/spring-data-jpa#learn) This source make persistence and communication with DB using hibernate.
+- [**Security:**](https://spring.io/projects/spring-security#learn) This source allow us manage authentication on our API.
+- [**Flyway:**](https://documentation.red-gate.com/flyway/getting-started-with-flyway) This manages migrations to create tables on DB and modifications of these tables.
+- [**JWT:**](https://jwt.io) This source help us to make token of our password which will be validated with authentication.
 
 ## Resource
 
