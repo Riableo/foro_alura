@@ -2,12 +2,11 @@ package com.aluracursos.foroalura.controller;
 
 import com.aluracursos.foroalura.domain.ValidacionException;
 import com.aluracursos.foroalura.domain.curso.Curso;
-import com.aluracursos.foroalura.domain.curso.DatosRespuestaCurso;
 import com.aluracursos.foroalura.domain.curso.ICursoRepository;
 import com.aluracursos.foroalura.domain.topico.*;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,11 +16,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Objects;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/topicos")
+@SecurityRequirement(name = "bearer-key")
 public class TopicoController {
 
     @Autowired
