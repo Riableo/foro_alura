@@ -16,6 +16,7 @@ Project about forum that manages users, topics, answers and courses, also profil
 - [**Security:**](https://spring.io/projects/spring-security#learn) This source allow us manage authentication on our API.
 - [**Flyway:**](https://documentation.red-gate.com/flyway/getting-started-with-flyway) This manages migrations to create tables on DB and modifications of these tables.
 - [**JWT:**](https://jwt.io) This source help us to make token of our password which will be validated with authentication.
+- [**Spring DOC:**](https://springdoc.org) This source help us to implement documentation about how use endpoints.
 
 ## Resource
 
@@ -28,3 +29,10 @@ Project about forum that manages users, topics, answers and courses, also profil
 - [**Samples not:**](https://www.baeldung.com/spring-data-derived-queries) This source shows samples with different keywords to implement with derived queries.
 
 ## Images
+
+![img.png](assets/Images/img.png)
+
+<p align="center">
+    <img src="assets/Images/endpointParam.png" alt="Doc about topic id param" style="width: 200px;">
+    <img src="assets/Images/endpointParamResponse.png" alt="Response topic id" style="width: 200px">
+</p>
