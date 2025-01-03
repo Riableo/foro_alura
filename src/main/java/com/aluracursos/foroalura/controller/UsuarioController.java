@@ -29,7 +29,8 @@ public class UsuarioController {
 
     @GetMapping
     public ResponseEntity<Page<DatosUserList>> listUser(Pageable paginacion){
-        Page<DatosUserList> users = usuarioRepo.findAll(paginacion).map(DatosUserList::new);
+        //Page<DatosUserList> users = usuarioRepo.findAll(paginacion).map(DatosUserList::new);
+        Page<DatosUserList> users = usuarioRepo.findByActivoTrue(paginacion).map(DatosUserList::new);
         return ResponseEntity.ok(users);
     }
 
@@ -38,5 +39,13 @@ public class UsuarioController {
     public ResponseEntity<DatosRespuestaUserUpdt> updateUser(@RequestBody @Valid DatosActualizarUser dataUpdtUser, @PathVariable Long id){
         DatosRespuestaUserUpdt dataUser = userService.updateUser(dataUpdtUser, id);
         return ResponseEntity.ok(dataUser);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity deleteUser(@PathVariable Long id){
+        Usuario user = usuarioRepo.getReferenceById(id);
+        user.inactiveUser();
+        return ResponseEntity.noContent().build();
     }
 }

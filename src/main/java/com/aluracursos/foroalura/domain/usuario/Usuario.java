@@ -29,6 +29,7 @@ public class Usuario implements UserDetails {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "perfil_id")
     private Perfil perfil;
+    private boolean activo;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -63,5 +64,9 @@ public class Usuario implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void inactiveUser(){
+        this.activo = false;
     }
 }

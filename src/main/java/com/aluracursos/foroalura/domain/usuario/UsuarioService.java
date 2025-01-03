@@ -24,7 +24,7 @@ public class UsuarioService {
 
         Perfil perfil = perfilRepo.findById(dataUser.idPerfil()).get();
 
-        Usuario usuario = new Usuario(null, dataUser.nombre(), dataUser.email(), dataUser.psswd(), perfil);
+        Usuario usuario = new Usuario(null, dataUser.nombre(), dataUser.email(), dataUser.psswd(), perfil, true);
 
         usuarioRepo.save(usuario);
 
@@ -63,7 +63,8 @@ public class UsuarioService {
                         nombre,
                         email,
                         psswd,
-                        perfil
+                        perfil,
+                        true
                 );
 
         return new DatosRespuestaUserUpdt(usuario);
