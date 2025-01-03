@@ -2,6 +2,7 @@ package com.aluracursos.foroalura.controller;
 
 import com.aluracursos.foroalura.domain.usuario.*;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,5 +31,12 @@ public class UsuarioController {
     public ResponseEntity<Page<DatosUserList>> listUser(Pageable paginacion){
         Page<DatosUserList> users = usuarioRepo.findAll(paginacion).map(DatosUserList::new);
         return ResponseEntity.ok(users);
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<DatosRespuestaUserUpdt> updateUser(@RequestBody @Valid DatosActualizarUser dataUpdtUser, @PathVariable Long id){
+        DatosRespuestaUserUpdt dataUser = userService.updateUser(dataUpdtUser, id);
+        return ResponseEntity.ok(dataUser);
     }
 }

@@ -3,6 +3,7 @@ package com.aluracursos.foroalura.domain.usuario;
 import com.aluracursos.foroalura.domain.ValidacionException;
 import com.aluracursos.foroalura.domain.perfil.IPerfilRepository;
 import com.aluracursos.foroalura.domain.perfil.Perfil;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +29,43 @@ public class UsuarioService {
         usuarioRepo.save(usuario);
 
         return new DatosRespuestaUser(usuario);
+    }
+
+    public DatosRespuestaUserUpdt updateUser(DatosActualizarUser dataUpdtUser, Long id) {
+
+        if (!usuarioRepo.existsById(id)){
+            throw new ValidacionException("No existe usuario con el id ingresdo");
+        }
+
+        Usuario repoUser = usuarioRepo.getReferenceById(id);
+
+        Perfil perfil;
+
+        String nombre = dataUpdtUser.nombre() == null ? repoUser.getNombre() : dataUpdtUser.nombre();
+        String email = dataUpdtUser.email() == null ? repoUser.getEmail() : dataUpdtUser.email();
+        String psswd = dataUpdtUser.psswd() == null ? repoUser.getPsswd() : dataUpdtUser.psswd();
+
+        if (dataUpdtUser.perfil() != null){
+
+            if (!perfilRepo.existsById(dataUpdtUser.perfil())){
+                throw new ValidacionException("No existe perfil con el id ingresado");
+            }
+
+            perfil = perfilRepo.findById(dataUpdtUser.perfil()).get();
+        }else {
+            perfil = repoUser.getPerfil();
+        }
+
+
+        Usuario usuario =
+                new Usuario(
+                        id,
+                        nombre,
+                        email,
+                        psswd,
+                        perfil
+                );
+
+        return new DatosRespuestaUserUpdt(usuario);
     }
 }
