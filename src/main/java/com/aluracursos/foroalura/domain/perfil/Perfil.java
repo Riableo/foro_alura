@@ -15,8 +15,8 @@ import lombok.NoArgsConstructor;
 public class Perfil {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String nombre;
+    private Long id;
+    private String nombre;
 
     public Perfil(DatosRegistroPerfil dataPerfil) {
         this.nombre = dataPerfil.nombre();

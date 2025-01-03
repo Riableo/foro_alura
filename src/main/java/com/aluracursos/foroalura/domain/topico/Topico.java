@@ -19,18 +19,18 @@ import java.time.LocalDateTime;
 public class Topico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String titulo;
-    String mensaje;
-    LocalDateTime fechaCreacion;
+    private Long id;
+    private String titulo;
+    private String mensaje;
+    private LocalDateTime fechaCreacion;
     //TODO: enum status (careful with DB to avoid errors)
-    String status;
+    private String status;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id")
-    Usuario usuario;
+    private Usuario usuario;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "curso_id")
-    Curso curso;
+    private Curso curso;
 
     public void updateTopic(DatosActualizarTopic dataTopic, Curso curso){
         if (dataTopic.titulo() != null){
