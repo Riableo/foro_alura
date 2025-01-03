@@ -30,9 +30,15 @@ Project about forum that manages users, topics, answers and courses, also profil
 
 ## Images
 
-![img.png](assets/Images/img.png)
+<p align="center">
+    <img src="assets/Images/img.png" alt="Initial image of swagger API documentation" style="width: 900px;">
+</p>
+
+Main image of Swagger with visual e interactive information about API.
 
 <p align="center">
-    <img src="assets/Images/endpointParam.png" alt="Doc about topic id param" style="width: 200px;">
-    <img src="assets/Images/endpointParamResponse.png" alt="Response topic id" style="width: 200px">
+    <img src="assets/Images/endpointParam.png" alt="Doc about topic id param" style="width: 900px;">
+    <img src="assets/Images/endpointParamResponse.png" alt="Response topic id" style="width: 900px;">
 </p>
+
+Images with request to API with /topicos/{id} and response of it.
