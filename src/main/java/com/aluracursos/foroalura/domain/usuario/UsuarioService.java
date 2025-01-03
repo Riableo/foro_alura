@@ -31,7 +31,7 @@ public class UsuarioService {
         return new DatosRespuestaUser(usuario);
     }
 
-    public DatosRespuestaUserUpdt updateUser(DatosActualizarUser dataUpdtUser, Long id) {
+    public DatosRespuestaUser updateUser(DatosActualizarUser dataUpdtUser, Long id) {
 
         if (!usuarioRepo.existsById(id)){
             throw new ValidacionException("No existe usuario con el id ingresdo");
@@ -67,6 +67,6 @@ public class UsuarioService {
                         true
                 );
 
-        return new DatosRespuestaUserUpdt(usuario);
+        return new DatosRespuestaUser(usuario);
     }
 }

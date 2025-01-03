@@ -36,8 +36,8 @@ public class UsuarioController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<DatosRespuestaUserUpdt> updateUser(@RequestBody @Valid DatosActualizarUser dataUpdtUser, @PathVariable Long id){
-        DatosRespuestaUserUpdt dataUser = userService.updateUser(dataUpdtUser, id);
+    public ResponseEntity<DatosRespuestaUser> updateUser(@RequestBody @Valid DatosActualizarUser dataUpdtUser, @PathVariable Long id){
+        DatosRespuestaUser dataUser = userService.updateUser(dataUpdtUser, id);
         return ResponseEntity.ok(dataUser);
     }
 
