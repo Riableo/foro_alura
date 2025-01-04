@@ -1,6 +1,7 @@
 package com.aluracursos.foroalura.domain.topico;
 
 import com.aluracursos.foroalura.domain.curso.Curso;
+import com.aluracursos.foroalura.domain.respuesta.Respuesta;
 import com.aluracursos.foroalura.domain.usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -31,6 +32,9 @@ public class Topico {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "curso_id")
     private Curso curso;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "respuesta_id")
+    private Respuesta respuesta;
 
     public void inactiveTopic() {
         this.status = "Desactivado";

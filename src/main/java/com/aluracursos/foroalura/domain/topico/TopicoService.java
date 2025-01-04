@@ -45,7 +45,8 @@ public class TopicoService {
                         LocalDateTime.now(),
                         "Activo",
                         user,
-                        curso
+                        curso,
+                        null
                 );
 
         topicRepo.save(topic);
@@ -80,7 +81,8 @@ public class TopicoService {
                         topico.getFechaCreacion(),
                         status,
                         topico.getUsuario(),
-                        curso
+                        curso,
+                        null
                 );
 
         return new DatosRespuestaTopic(topic);

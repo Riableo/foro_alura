@@ -39,15 +39,74 @@ public class RespuestaService {
         Respuesta respuesta =
                 new Respuesta(
                         null,
+                        true,
                         dataReqRespuesta.mensaje(),
                         topico,
                         LocalDateTime.now(),
                         user,
-                        true
+                        false
                 );
 
         resRepo.save(respuesta);
 
-        return new DatosRespuesta(respuesta, topico);
+        return new DatosRespuesta(respuesta);
+    }
+
+    public DatosRespuesta updateRespuesta(DataUpdtResp dataResp, Long id) {
+
+        if (!resRepo.existsById(id)){
+            throw new ValidacionException("La respuesta con el id ingresado no existe");
+        }
+
+        Respuesta respuesta = resRepo.findById(id).get();
+
+        String mensaje = dataResp.mensaje() != null ? dataResp.mensaje() : respuesta.getMensaje();
+        boolean solucion = dataResp.solucion() != respuesta.isSolucion() ? dataResp.solucion() : respuesta.isSolucion();
+
+
+        if (solucion){
+            // Update respuesta_id with respuesta solucion true
+            if (!respuesta.isSolucion()){
+                updateTopicRes(respuesta, solucion);
+            }
+        }else {
+            if (respuesta.isSolucion()){
+                // Delete respuesta_id when before solucion was true
+                updateTopicRes(respuesta, solucion);
+            }
+        }
+
+        Respuesta updtResp =
+                new Respuesta(
+                        respuesta.getId(),
+                        respuesta.isActivo(),
+                        mensaje,
+                        respuesta.getTopico(),
+                        respuesta.getFechaCreacion(),
+                        respuesta.getUsuario(),
+                        solucion
+                );
+
+        return new DatosRespuesta(updtResp);
+    }
+
+    private void updateTopicRes(Respuesta respuesta, boolean solucion) {
+
+        Topico topico = topicRepo.getReferenceById(respuesta.getTopico().getId());
+
+        Topico updteTopico =
+                new Topico(
+                        topico.getId(),
+                        topico.getTitulo(),
+                        topico.getMensaje(),
+                        topico.getFechaCreacion(),
+                        topico.getStatus(),
+                        topico.getUsuario(),
+                        topico.getCurso(),
+                        solucion ? respuesta : null
+                );
+
+        topicRepo.save(updteTopico);
+
     }
 }

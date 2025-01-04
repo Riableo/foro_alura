@@ -2,13 +2,13 @@ package com.aluracursos.foroalura.controller;
 
 import com.aluracursos.foroalura.domain.respuesta.*;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
@@ -32,5 +32,18 @@ public class RespuestaController {
 
         return ResponseEntity.created(url).body(dataRespuesta);
 
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<DatosRespuestaList>> listRespuesta(Pageable paginacion){
+        Page<DatosRespuestaList> dataResp = respuestaRepo.findByActivoTrue(paginacion).map(DatosRespuestaList::new);
+        return ResponseEntity.ok(dataResp);
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<DatosRespuesta> updtRespuesta(@RequestBody @Valid DataUpdtResp dataResp, @PathVariable Long id){
+        DatosRespuesta updtResp = resService.updateRespuesta(dataResp, id);
+        return ResponseEntity.ok(updtResp);
     }
 }

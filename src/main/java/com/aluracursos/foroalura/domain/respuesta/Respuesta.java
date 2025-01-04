@@ -20,6 +20,7 @@ public class Respuesta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private boolean activo;
     private String mensaje;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "topico_id")
