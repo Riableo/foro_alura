@@ -48,4 +48,19 @@ public class UsuarioController {
         user.inactiveUser();
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity getUser(@PathVariable Long id){
+        Usuario user = usuarioRepo.getReferenceById(id);
+        DatosRespuestaUser dataUser =
+                new DatosRespuestaUser(
+                        user.getId(),
+                        user.getNombre(),
+                        user.getEmail(),
+                        user.getPsswd(),
+                        user.getPerfil().getNombre()
+                );
+
+        return ResponseEntity.ok(dataUser);
+    }
 }
