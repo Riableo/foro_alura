@@ -67,6 +67,8 @@ public class UsuarioService {
                         true
                 );
 
+        usuarioRepo.save(usuario);
+
         return new DatosRespuestaUser(usuario);
     }
 }

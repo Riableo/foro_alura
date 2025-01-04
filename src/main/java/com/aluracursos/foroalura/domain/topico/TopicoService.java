@@ -85,6 +85,8 @@ public class TopicoService {
                         null
                 );
 
+        topicRepo.save(topic);
+
         return new DatosRespuestaTopic(topic);
     }
 }
