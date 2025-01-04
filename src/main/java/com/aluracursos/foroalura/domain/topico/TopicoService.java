@@ -52,4 +52,37 @@ public class TopicoService {
 
         return new DatosRespuestaTopic(topic);
     }
+
+    public DatosRespuestaTopic updateTopic(DatosActualizarTopic dataUpdTopic, Long id){
+
+        Topico topico = topicRepo.getReferenceById(id);
+
+        Curso curso;
+
+        if (dataUpdTopic.idCurso() != null){
+            if (!cursoRepo.existsById(dataUpdTopic.idCurso())){
+                throw new ValidacionException("Curso no existe con el id ingresado");
+            }
+            curso = cursoRepo.getReferenceById(dataUpdTopic.idCurso());
+        }else {
+            curso = topico.getCurso();
+        }
+
+        String titulo =  dataUpdTopic.titulo() != null ? dataUpdTopic.titulo() : topico.getTitulo();
+        String mensaje = dataUpdTopic.mensaje() != null ? dataUpdTopic.mensaje() : topico.getMensaje();
+        String status = dataUpdTopic.status() != null ? dataUpdTopic.status() : topico.getStatus();
+
+        Topico topic =
+                new Topico(
+                        id,
+                        titulo,
+                        mensaje,
+                        topico.getFechaCreacion(),
+                        status,
+                        topico.getUsuario(),
+                        curso
+                );
+
+        return new DatosRespuestaTopic(topic);
+    }
 }

@@ -81,24 +81,7 @@ public class TopicoController {
             throw new ValidacionException("No coincide el id ingresado con la ruta ingresada");
         }
 
-        Curso curso = null;
-
-        Topico topico = topicRepo.getReferenceById(id);
-
-        if (dataTopic.idCurso() != null){
-            curso = cursoRepo.getReferenceById(dataTopic.idCurso());
-        }
-
-        topico.updateTopic(dataTopic, curso);
-        DatosRespuestaTopic dataResTopic =
-                new DatosRespuestaTopic(
-                        topico.getTitulo(),
-                        topico.getMensaje(),
-                        topico.getFechaCreacion(),
-                        topico.getStatus(),
-                        topico.getUsuario().getNombre(),
-                        topico.getCurso().getNombre()
-                );
+        DatosRespuestaTopic dataResTopic = topicService.updateTopic(dataTopic, id);
 
         return ResponseEntity.ok(dataResTopic);
     }

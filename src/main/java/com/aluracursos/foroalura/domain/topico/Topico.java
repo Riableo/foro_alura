@@ -32,24 +32,6 @@ public class Topico {
     @JoinColumn(name = "curso_id")
     private Curso curso;
 
-    public void updateTopic(DatosActualizarTopic dataTopic, Curso curso){
-        if (dataTopic.titulo() != null){
-            this.titulo = dataTopic.titulo();
-        }
-
-        if (dataTopic.mensaje() != null){
-            this.mensaje = dataTopic.mensaje();
-        }
-
-        if (dataTopic.status() != null){
-            this.status = dataTopic.status();
-        }
-
-        if(dataTopic.idCurso() != null){
-            this.curso = curso;
-        }
-    }
-
     public void inactiveTopic() {
         this.status = "Desactivado";
     }
