@@ -8,7 +8,8 @@ public record DatosRespuesta(
         String topicoMensaje,
         String mensaje,
         LocalDateTime fechaCreacion,
-        String usuario
+        String usuario,
+        boolean solucion
 ) {
     public DatosRespuesta(Respuesta respuesta) {
         this(
@@ -17,7 +18,8 @@ public record DatosRespuesta(
                 respuesta.getTopico().getMensaje(),
                 respuesta.getMensaje(),
                 respuesta.getFechaCreacion(),
-                respuesta.getUsuario().getNombre()
+                respuesta.getUsuario().getNombre(),
+                respuesta.isSolucion()
         );
     }
 }

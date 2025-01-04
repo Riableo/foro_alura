@@ -46,4 +46,28 @@ public class RespuestaController {
         DatosRespuesta updtResp = resService.updateRespuesta(dataResp, id);
         return ResponseEntity.ok(updtResp);
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity deleteRespuesta(@PathVariable Long id){
+        Respuesta respuesta = respuestaRepo.getReferenceById(id);
+        respuesta.inactiveRespuesta();
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DatosRespuesta> obtenerRespuesta(@PathVariable Long id){
+        Respuesta respuesta = respuestaRepo.getReferenceById(id);
+        DatosRespuesta dataResp =
+                new DatosRespuesta(
+                        respuesta.getId(),
+                        respuesta.getTopico().getTitulo(),
+                        respuesta.getTopico().getMensaje(),
+                        respuesta.getMensaje(),
+                        respuesta.getFechaCreacion(),
+                        respuesta.getUsuario().getNombre(),
+                        respuesta.isSolucion()
+                );
+        return ResponseEntity.ok(dataResp);
+    }
 }

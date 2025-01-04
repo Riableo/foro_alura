@@ -63,17 +63,9 @@ public class RespuestaService {
         String mensaje = dataResp.mensaje() != null ? dataResp.mensaje() : respuesta.getMensaje();
         boolean solucion = dataResp.solucion() != respuesta.isSolucion() ? dataResp.solucion() : respuesta.isSolucion();
 
-
-        if (solucion){
-            // Update respuesta_id with respuesta solucion true
-            if (!respuesta.isSolucion()){
-                updateTopicRes(respuesta, solucion);
-            }
-        }else {
-            if (respuesta.isSolucion()){
-                // Delete respuesta_id when before solucion was true
-                updateTopicRes(respuesta, solucion);
-            }
+        if (dataResp.solucion() != respuesta.isSolucion()){
+            // Update/Delete respuesta_id
+            updateTopicRes(respuesta, solucion);
         }
 
         Respuesta updtResp =
@@ -86,6 +78,8 @@ public class RespuestaService {
                         respuesta.getUsuario(),
                         solucion
                 );
+
+        resRepo.save(updtResp);
 
         return new DatosRespuesta(updtResp);
     }

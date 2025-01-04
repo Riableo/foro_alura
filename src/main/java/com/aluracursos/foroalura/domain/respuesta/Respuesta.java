@@ -30,4 +30,8 @@ public class Respuesta {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
     private boolean solucion;
+
+    public void inactiveRespuesta() {
+        this.activo = false;
+    }
 }
