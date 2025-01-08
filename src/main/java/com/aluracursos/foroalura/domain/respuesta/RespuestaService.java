@@ -1,6 +1,7 @@
 package com.aluracursos.foroalura.domain.respuesta;
 
 import com.aluracursos.foroalura.domain.ValidacionException;
+import com.aluracursos.foroalura.domain.respuesta.validaciones.IValidadorRespuestas;
 import com.aluracursos.foroalura.domain.topico.ITopicoRepository;
 import com.aluracursos.foroalura.domain.topico.Topico;
 import com.aluracursos.foroalura.domain.usuario.IUsuarioRepository;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class RespuestaService {
@@ -21,6 +23,9 @@ public class RespuestaService {
 
     @Autowired
     private IRespuestaRepository resRepo;
+
+    @Autowired
+    private List<IValidadorRespuestas> validadores;
 
     public DatosRespuesta createRespuesta(DatosRegistroRespuesta dataReqRespuesta){
 
@@ -54,11 +59,14 @@ public class RespuestaService {
 
     public DatosRespuesta updateRespuesta(DataUpdtResp dataResp, Long id) {
 
-        if (!resRepo.existsById(id)){
+        if (!resRepo.existsById(id)) {
             throw new ValidacionException("La respuesta con el id ingresado no existe");
         }
 
         Respuesta respuesta = resRepo.findById(id).get();
+
+        // Validators
+        validadores.forEach(v -> v.validar(dataResp, respuesta.getTopico().getId()));
 
         String mensaje = dataResp.mensaje() != null ? dataResp.mensaje() : respuesta.getMensaje();
         boolean solucion = dataResp.solucion() != respuesta.isSolucion() ? dataResp.solucion() : respuesta.isSolucion();
@@ -94,7 +102,7 @@ public class RespuestaService {
                         topico.getTitulo(),
                         topico.getMensaje(),
                         topico.getFechaCreacion(),
-                        topico.getStatus(),
+                        solucion ? "Solucion" : "Activo",
                         topico.getUsuario(),
                         topico.getCurso(),
                         solucion ? respuesta : null
