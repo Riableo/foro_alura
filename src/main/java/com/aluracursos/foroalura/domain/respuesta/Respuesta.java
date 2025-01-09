@@ -33,5 +33,9 @@ public class Respuesta {
 
     public void inactiveRespuesta() {
         this.activo = false;
+
+        if (this.solucion){
+            this.solucion = false;
+        }
     }
 }

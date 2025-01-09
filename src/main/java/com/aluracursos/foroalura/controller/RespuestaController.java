@@ -1,6 +1,8 @@
 package com.aluracursos.foroalura.controller;
 
 import com.aluracursos.foroalura.domain.respuesta.*;
+import com.aluracursos.foroalura.domain.topico.ITopicoRepository;
+import com.aluracursos.foroalura.domain.topico.Topico;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -23,6 +25,9 @@ public class RespuestaController {
 
     @Autowired
     private IRespuestaRepository respuestaRepo;
+
+    @Autowired
+    private ITopicoRepository topicRepo;
 
     @PostMapping
     public ResponseEntity<DatosRespuesta> createRespuesta(@RequestBody @Valid DatosRegistroRespuesta dataReqRespuesta, UriComponentsBuilder uriComponentsBuilder){
@@ -51,6 +56,12 @@ public class RespuestaController {
     @Transactional
     public ResponseEntity deleteRespuesta(@PathVariable Long id){
         Respuesta respuesta = respuestaRepo.getReferenceById(id);
+        Topico topico = topicRepo.getReferenceById(respuesta.getTopico().getId());
+        if (topico.getRespuesta() != null){
+            if (topico.getRespuesta().getId().equals(respuesta.getId())){
+                topico.updateSolucion();
+            }
+        }
         respuesta.inactiveRespuesta();
         return ResponseEntity.noContent().build();
     }

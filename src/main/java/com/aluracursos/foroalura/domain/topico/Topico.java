@@ -39,4 +39,9 @@ public class Topico {
     public void inactiveTopic() {
         this.status = "Desactivado";
     }
+
+    public void updateSolucion() {
+        this.respuesta = null;
+        this.status = "Activo";
+    }
 }

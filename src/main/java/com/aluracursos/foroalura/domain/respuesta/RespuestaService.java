@@ -102,7 +102,7 @@ public class RespuestaService {
                         topico.getTitulo(),
                         topico.getMensaje(),
                         topico.getFechaCreacion(),
-                        solucion ? "Solucion" : "Activo",
+                        solucion ? "Solucionado" : "Activo",
                         topico.getUsuario(),
                         topico.getCurso(),
                         solucion ? respuesta : null
