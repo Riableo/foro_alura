@@ -69,11 +69,16 @@ public class RespuestaService {
         validadores.forEach(v -> v.validar(dataResp, respuesta.getTopico().getId()));
 
         String mensaje = dataResp.mensaje() != null ? dataResp.mensaje() : respuesta.getMensaje();
-        boolean solucion = dataResp.solucion() != respuesta.isSolucion() ? dataResp.solucion() : respuesta.isSolucion();
 
-        if (dataResp.solucion() != respuesta.isSolucion()){
-            // Update/Delete respuesta_id
-            updateTopicRes(respuesta, solucion);
+        boolean solucion = respuesta.isSolucion();
+
+        if (dataResp.solucion() != null){
+
+            // aux to avoid change of variable when solucion wasn't passed using boolean
+            boolean solucionBoolean = dataResp.solucion() == "true" ? true : false;
+
+            solucion = solucion != solucionBoolean ? solucionBoolean : solucion;
+
         }
 
         Respuesta updtResp =
