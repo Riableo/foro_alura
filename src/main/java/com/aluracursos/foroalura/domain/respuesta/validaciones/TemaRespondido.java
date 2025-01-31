@@ -14,15 +14,18 @@ public class TemaRespondido implements IValidadorRespuestas{
     private ITopicoRepository topicRepo;
 
     @Override
-    public void validar(DataUpdtResp dataUpdt, Long idTopic) {
-        boolean respuesta = dataUpdt.solucion();
+    public void validar(DataUpdtResp dataUpdt, Long id, Long idTopic) {
 
-        if (respuesta){
-            Topico topico = topicRepo.getReferenceById(idTopic);
+        if (dataUpdt.solucion() != null){
 
-            if (topico.getStatus().equals("Solucionado") && topico.getRespuesta() != null){
-                throw new ValidacionException("Topico ya tiene una respuesta vinculada");
+            if (dataUpdt.solucion()){
+                Topico topico = topicRepo.getReferenceById(idTopic);
+
+                if (topico.getStatus().equals("Solucionado") && topico.getRespuesta() != null && !topico.getRespuesta().getId().equals(id)){
+                    throw new ValidacionException("Topico ya tiene una respuesta vinculada");
+                }
             }
         }
+
     }
 }
