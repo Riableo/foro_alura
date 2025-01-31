@@ -66,7 +66,7 @@ public class RespuestaService {
         Respuesta respuesta = resRepo.findById(id).get();
 
         // Validators
-        validadores.forEach(v -> v.validar(dataResp, respuesta.getTopico().getId()));
+        validadores.forEach(v -> v.validar(dataResp, id, respuesta.getTopico().getId()));
 
         String mensaje = dataResp.mensaje() != null ? dataResp.mensaje() : respuesta.getMensaje();
 
@@ -75,9 +75,14 @@ public class RespuestaService {
         if (dataResp.solucion() != null){
 
             // aux to avoid change of variable when solucion wasn't passed using boolean
-            boolean solucionBoolean = dataResp.solucion() == "true" ? true : false;
+            boolean solucionBoolean = dataResp.solucion().equals("true");
 
-            solucion = solucion != solucionBoolean ? solucionBoolean : solucion;
+            if (solucion != solucionBoolean) {
+
+                solucion = solucionBoolean;
+                // Update/Delete respuesta_id
+                updateTopicRes(respuesta, solucion);
+            }
 
         }
 
