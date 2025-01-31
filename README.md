@@ -27,6 +27,7 @@ Project about forum that manages users, topics, answers and courses, also profil
 - [**Mismatch Exception:**](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/method/annotation/MethodArgumentTypeMismatchException.html) This source allows me know methods to work with the exception of data type.
 - [**Query methods:**](https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html) This source shows me to understand how implement the keyword not on a derived query.
 - [**Samples not:**](https://www.baeldung.com/spring-data-derived-queries) This source shows samples with different keywords to implement with derived queries.
+- [**Boolean:**](https://stackoverflow.com/questions/15937715/java-check-if-boolean-is-null) On this forum I could resolve my issue with boolean validation when it was null. 
 
 ## Images
 
