@@ -21,7 +21,7 @@ public class TemaRespondido implements IValidadorRespuestas{
             if (dataUpdt.solucion().equals("true")){
                 Topico topico = topicRepo.getReferenceById(idTopic);
 
-                if (topico.getStatus().equals("Solucionado") && topico.getRespuesta() != null && topico.getRespuesta().getId() != id){
+                if (topico.getStatus().equals("Solucionado") && topico.getRespuesta() != null && !topico.getRespuesta().getId().equals(id)){
                     throw new ValidacionException("Topico ya tiene una respuesta vinculada");
                 }
             }
